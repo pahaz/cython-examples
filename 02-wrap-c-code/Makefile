@@ -14,7 +14,7 @@ all: $(TARGET) $(TARGET_DEPS)
 	$(CC) -c $< -o $@ $(PYCFLAGS)
 
 %.so: %.o
-	$(CC) `find -name '*.o'` -o $@ -shared ${PYLDFLAGS}
+	$(CC) `find . -name '*.o'` -o $@ -shared ${PYLDFLAGS}
 
 
 clean:
