@@ -1,8 +1,8 @@
 import logging
 
-class Roster:
 
-    _clients = { }
+class Roster:
+    _clients = {}
 
     def handle_connect_event(self, client):
         """
@@ -12,7 +12,7 @@ class Roster:
         if client in self._clients:
             return True
         self._clients[client] = None
-        return False;
+        return False
 
     def handle_disconnect_event(self, client):
         logging.info("disconnect: %s" % client)

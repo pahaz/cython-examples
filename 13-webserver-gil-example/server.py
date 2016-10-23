@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from ConfigParser import SafeConfigParser
+from configparser import SafeConfigParser
 from PyMessageServer import MessageServer
 from WebServer import Dashboard
 
@@ -15,7 +15,8 @@ def configure_logging():
 
     ch = logging.StreamHandler(sys.stdout)
     ch.setLevel(logging.DEBUG)
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    formatter = logging.Formatter(
+        '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     ch.setFormatter(formatter)
     root.addHandler(ch)
 
@@ -32,14 +33,14 @@ def main():
     conf = options.config
     if conf is None:
         sys.exit("No configuration specified")
-    
+
     parser = SafeConfigParser()
     parser.read(conf)
 
     logging.info("Parsing configuration")
     message_server_port = int(parser.get("MessageServer", "port"))
     web_dashboard_port = int(parser.get("MessageServer", "webport"))
-    
+
     logging.info("trying to start server...")
     message_server = MessageServer(message_server_port)
     message_server.start()
@@ -52,7 +53,7 @@ def main():
     message_server.stop()
 
     logging.info("Done..")
-    
+
 
 if __name__ == "__main__":
     main()

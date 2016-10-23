@@ -7,27 +7,23 @@ import logging
 ## GLOBALS
 _ROSTER = Roster()
 
-
-cdef int pyconnect_callback(client *c, char * args):
+cdef int pyconnect_callback(client *c, char *args):
     clientExists = _ROSTER.handle_connect_event(c.cid)
     return 1 if clientExists is True else 0
 
-
-cdef int pydisconnect_callback(client *c, char * args):
+cdef int pydisconnect_callback(client *c, char *args):
     _ROSTER.handle_disconnect_event(c.cid)
     return 0
 
-
-cdef int pyread_callback(client *c, char * message):
+cdef int pyread_callback(client *c, char *message):
     _ROSTER.handle_read_event(c.cid, message)
     return 0
 
 
 class MessageServer(threading.Thread):
-
     _port = None
-    
-    def __init__ (self, port):
+
+    def __init__(self, port):
         threading.Thread.__init__(self)
         # self.daemon = True
         self._port = port
@@ -48,7 +44,7 @@ class MessageServer(threading.Thread):
 
     def stop(self):
         with nogil:
-            StopServer();
+            StopServer()
 
     def run(self):
         logging.info("Starting Message Server on localhost:%i" % self.port)
@@ -57,4 +53,3 @@ class MessageServer(threading.Thread):
         with nogil:
             StartServer(cport)
         logging.info("Message Server Finished")
-            

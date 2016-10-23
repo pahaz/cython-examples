@@ -4,12 +4,13 @@ from flask import jsonify
 app = Flask("DashboardExample")
 dashboard = None
 
+
 @app.route("/")
 def status():
     return jsonify(dashboard.roster.client_list())
 
+
 class Dashboard:
-    
     _port = None
     _roster = None
 
