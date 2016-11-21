@@ -1,5 +1,5 @@
 # compile
 
-    python setup.py build_ext --inplace
-    python -c 'import example1'
+    python3 setup.py build_ext --inplace
+    python3 -c 'import example1'
 

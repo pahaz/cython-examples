@@ -1,8 +1,8 @@
 TARGET = main
 TARGET_DEPS = example1.o example1.c main.o
-PYCFLAGS = $(shell python-config --cflags)
-PYLDFLAGS = $(shell python-config --ldflags)
-PYINCLUDES = $(shell python-config --includes)
+PYCFLAGS = -fPIC $(shell python3-config --cflags)
+PYLDFLAGS = $(shell python3-config --ldflags)
+PYINCLUDES = $(shell python3-config --includes)
 
 all: $(TARGET_DEPS)
 	gcc -o $(TARGET) main.o example1.o $(PYLDFLAGS) $(PYINCLUDES) $(PYCFLAGS)
