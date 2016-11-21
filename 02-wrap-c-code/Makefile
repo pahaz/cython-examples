@@ -1,7 +1,7 @@
 TARGET = incrementer.o example1.so
 TARGET_DEPS = $(TARGET:.so=.o) $(TARGET:.so=.c)
-PYCFLAGS = `python-config --cflags`
-PYLDFLAGS = `python-config --ldflags`
+PYCFLAGS = -fPIC `python3-config --cflags`
+PYLDFLAGS = `python3-config --ldflags`
 
 
 all: $(TARGET) $(TARGET_DEPS)
@@ -21,7 +21,7 @@ clean:
 	rm -rf $(TARGET) $(TARGET_DEPS) $(TARGET)
 
 test:
-	python -c 'import example1'
+	python3 -c 'import example1'
 
 info:
 	echo "TARGET: $(TARGET) DEPS: $(TARGET_DEPS)"
